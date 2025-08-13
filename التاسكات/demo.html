@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض توضيحي - نظام إدارة المشاريع</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .demo-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            font-weight: bold;
+        }
+        .accounts-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: right;
+        }
+        .account-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4CAF50;
+            margin-left: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .tech-stack {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .tech-badges {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🎯 نظام إدارة المشاريع والفرق</h1>
+        <p class="subtitle">نظام شامل ومتطور لإدارة المشاريع مع لوحة تحكم تفاعلية ورسوم بيانية متقدمة</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">لوحة تحكم تفاعلية</div>
+                <div class="feature-desc">رسوم بيانية متقدمة وإحصائيات فورية</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">إدارة المشاريع</div>
+                <div class="feature-desc">تتبع التقدم والمواعيد النهائية</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <div class="feature-title">إدارة المهام</div>
+                <div class="feature-desc">تكليف وتتبع المهام بسهولة</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <div class="feature-title">إدارة الفريق</div>
+                <div class="feature-desc">تتبع الإنتاجية والأداء</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">تقارير مفصلة</div>
+                <div class="feature-desc">تحليلات شاملة قابلة للتصدير</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-title">نظام صلاحيات</div>
+                <div class="feature-desc">ثلاثة مستويات من الصلاحيات</div>
+            </div>
+        </div>
+        
+        <div class="demo-buttons">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-rocket"></i>
+                تجربة النظام الآن
+            </a>
+            <a href="test.html" class="btn">
+                <i class="fas fa-info-circle"></i>
+                معلومات إضافية
+            </a>
+            <button class="btn" onclick="showSystemStatus()">
+                <i class="fas fa-cog"></i>
+                حالة النظام
+            </button>
+        </div>
+        
+        <div class="accounts-info">
+            <h3>🔑 حسابات تجريبية جاهزة:</h3>
+            <div class="account-row">
+                <span><strong>مدير عام:</strong> admin / admin123</span>
+                <span class="status-indicator"></span>
+            </div>
+            <div class="account-row">
+                <span><strong>مدير:</strong> sara / sara123</span>
+                <span class="status-indicator"></span>
+            </div>
+            <div class="account-row">
+                <span><strong>موظف:</strong> mohamed / mohamed123</span>
+                <span class="status-indicator"></span>
+            </div>
+            <div class="account-row">
+                <span><strong>موظف:</strong> fatima / fatima123</span>
+                <span class="status-indicator"></span>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h4>🛠️ التقنيات المستخدمة:</h4>
+            <div class="tech-badges">
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">JavaScript ES6+</span>
+                <span class="tech-badge">Chart.js</span>
+                <span class="tech-badge">Font Awesome</span>
+                <span class="tech-badge">LocalStorage</span>
+                <span class="tech-badge">PWA</span>
+                <span class="tech-badge">Service Worker</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSystemStatus() {
+            const features = [
+                { name: 'LocalStorage', status: typeof(Storage) !== "undefined" },
+                { name: 'ES6 Support', status: checkES6() },
+                { name: 'Chart.js', status: checkChartJS() },
+                { name: 'Service Worker', status: 'serviceWorker' in navigator },
+                { name: 'Fetch API', status: typeof fetch !== 'undefined' }
+            ];
+            
+            let statusHTML = '<h3>🔍 حالة النظام:</h3>';
+            features.forEach(feature => {
+                const icon = feature.status ? '✅' : '❌';
+                const status = feature.status ? 'مدعوم' : 'غير مدعوم';
+                statusHTML += `<p>${icon} ${feature.name}: ${status}</p>`;
+            });
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                justify-content: center; z-index: 1000; color: white;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: #333; padding: 2rem; border-radius: 10px; max-width: 500px;">
+                    ${statusHTML}
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: #667eea; color: white; border: none; 
+                                   padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-top: 1rem;">
+                        إغلاق
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        function checkES6() {
+            try {
+                eval('const test = () => {}; class Test {}');
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        
+        function checkChartJS() {
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.head.appendChild(script);
+            });
+        }
+        
+        // تأثير بصري
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.demo-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.8s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
