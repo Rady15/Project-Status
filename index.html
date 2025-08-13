@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المشاريع والفرق</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- <link rel="manifest" href="manifest.json"> تم تعطيله لتجنب خطأ CORS -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="إدارة المشاريع">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/browser-check.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/scroll-fix.js"></script>
+    <script src="js/reports-fix.js"></script>
+    <script src="js/chart-cleanup.js"></script>
+</head>
+<body>
+    <!-- صفحة تسجيل الدخول -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="login-form">
+                <h2><i class="fas fa-tasks"></i> نظام إدارة المشاريع</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">اسم المستخدم:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                    </button>
+                </form>
+                <div id="loginError" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="mainPage" class="page">
+        <!-- شريط التنقل -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-tasks"></i>
+                <span>نظام إدارة المشاريع</span>
+            </div>
+            <div class="nav-user">
+                <span id="currentUser"></span>
+                <button id="logoutBtn" class="btn btn-secondary">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </nav>
+
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#" data-section="dashboard" class="nav-link active">
+                    <i class="fas fa-tachometer-alt"></i> لوحة التحكم
+                </a></li>
+                <li><a href="#" data-section="projects" class="nav-link">
+                    <i class="fas fa-project-diagram"></i> المشاريع
+                </a></li>
+                <li><a href="#" data-section="tasks" class="nav-link">
+                    <i class="fas fa-tasks"></i> المهام
+                </a></li>
+                <li><a href="#" data-section="team" class="nav-link">
+                    <i class="fas fa-users"></i> الفريق
+                </a></li>
+                <li><a href="#" data-section="reports" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> التقارير
+                </a></li>
+                <li id="adminMenu" style="display: none;"><a href="#" data-section="admin" class="nav-link">
+                    <i class="fas fa-cog"></i> الإدارة
+                </a></li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- لوحة التحكم -->
+            <section id="dashboard" class="content-section active">
+                <h1>لوحة التحكم</h1>
+                
+                <!-- إحصائيات سريعة -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalProjects">0</h3>
+                            <p>إجمالي المشاريع</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalTasks">0</h3>
+                            <p>إجمالي المهام</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="completedTasks">0</h3>
+                            <p>المهام المكتملة</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalMembers">0</h3>
+                            <p>أعضاء الفريق</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الرسوم البيانية -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>تقدم المشاريع</h3>
+                        <canvas id="projectsChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>حالة المهام</h3>
+                        <canvas id="tasksChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- المهام الحديثة -->
+                <div class="recent-tasks">
+                    <h3>المهام الحديثة</h3>
+                    <div id="recentTasksList" class="tasks-list"></div>
+                </div>
+            </section>
+
+            <!-- قسم المشاريع -->
+            <section id="projects" class="content-section">
+                <div class="section-header">
+                    <h1>المشاريع</h1>
+                    <button id="addProjectBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> إضافة مشروع جديد
+                    </button>
+                </div>
+                <div id="projectsList" class="projects-grid"></div>
+            </section>
+
+            <!-- قسم المهام -->
+            <section id="tasks" class="content-section">
+                <div class="section-header">
+                    <h1>المهام</h1>
+                    <button id="addTaskBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> إضافة مهمة جديدة
+                    </button>
+                </div>
+                <div class="tasks-filters">
+                    <select id="projectFilter">
+                        <option value="">جميع المشاريع</option>
+                    </select>
+                    <select id="statusFilter">
+                        <option value="">جميع الحالات</option>
+                        <option value="pending">قيد الانتظار</option>
+                        <option value="in-progress">قيد التنفيذ</option>
+                        <option value="completed">مكتملة</option>
+                    </select>
+                </div>
+                <div id="tasksList" class="tasks-grid"></div>
+            </section>
+
+            <!-- قسم الفريق -->
+            <section id="team" class="content-section">
+                <h1>الفريق</h1>
+                <div id="teamList" class="team-grid"></div>
+            </section>
+
+            <!-- قسم التقارير -->
+            <section id="reports" class="content-section">
+                <h1>التقارير</h1>
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>تقرير الإنتاجية</h3>
+                        <canvas id="productivityChart"></canvas>
+                    </div>
+                    <div class="report-card">
+                        <h3>تقرير الوقت المستغرق</h3>
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- قسم الإدارة -->
+            <section id="admin" class="content-section">
+                <h1>الإدارة</h1>
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="users">إدارة المستخدمين</button>
+                    <button class="tab-btn" data-tab="settings">الإعدادات</button>
+                </div>
+                <div id="usersTab" class="tab-content active">
+                    <button id="addUserBtn" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> إضافة مستخدم جديد
+                    </button>
+                    <div id="usersList" class="users-list"></div>
+                </div>
+                <div id="settingsTab" class="tab-content">
+                    <h3>إعدادات النظام</h3>
+                    <p>قريباً...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- النوافذ المنبثقة -->
+    <!-- نافذة إضافة مشروع -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة مشروع جديد</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="projectName">اسم المشروع:</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectDescription">الوصف:</label>
+                    <textarea id="projectDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectDeadline">الموعد النهائي:</label>
+                    <input type="date" id="projectDeadline">
+                </div>
+                <div class="form-group">
+                    <label for="projectManager">مدير المشروع:</label>
+                    <select id="projectManager"></select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة مهمة -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة مهمة جديدة</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskTitle">عنوان المهمة:</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">الوصف:</label>
+                    <textarea id="taskDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="taskProject">المشروع:</label>
+                    <select id="taskProject" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="taskAssignee">المكلف:</label>
+                    <select id="taskAssignee" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="taskPriority">الأولوية:</label>
+                    <select id="taskPriority">
+                        <option value="low">منخفضة</option>
+                        <option value="medium">متوسطة</option>
+                        <option value="high">عالية</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskDeadline">الموعد النهائي:</label>
+                    <input type="date" id="taskDeadline">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('taskModal')">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة مستخدم -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة مستخدم جديد</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label for="userName">الاسم:</label>
+                    <input type="text" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userUsername">اسم المستخدم:</label>
+                    <input type="text" id="userUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">كلمة المرور:</label>
+                    <input type="password" id="userPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="userRole">الدور:</label>
+                    <select id="userRole">
+                        <option value="employee">موظف</option>
+                        <option value="manager">مدير</option>
+                        <option value="admin">مدير عام</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">البريد الإلكتروني:</label>
+                    <input type="email" id="userEmail">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة تحديث المهمة -->
+    <div id="taskUpdateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تحديث المهمة</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="taskUpdateForm">
+                <input type="hidden" id="updateTaskId">
+                <div class="form-group">
+                    <label for="updateTaskStatus">الحالة:</label>
+                    <select id="updateTaskStatus">
+                        <option value="pending">قيد الانتظار</option>
+                        <option value="in-progress">قيد التنفيذ</option>
+                        <option value="completed">مكتملة</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="updateTaskProgress">نسبة الإنجاز (%):</label>
+                    <input type="number" id="updateTaskProgress" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="updateTaskNotes">ملاحظات:</label>
+                    <textarea id="updateTaskNotes" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="updateTaskTimeSpent">الوقت المستغرق (ساعات):</label>
+                    <input type="number" id="updateTaskTimeSpent" min="0" step="0.5">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('taskUpdateModal')">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ التحديث</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/team.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>

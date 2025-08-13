@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار نظام إدارة المشاريع</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .test-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        h1 {
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .features {
+            text-align: right;
+            margin-top: 2rem;
+        }
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        .features li {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .features li::before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        .accounts {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: right;
+        }
+        .account {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .account strong {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎯 نظام إدارة المشاريع والفرق</h1>
+        <p>نظام شامل ومتطور لإدارة المشاريع والفرق مع لوحة تحكم تفاعلية ورسوم بيانية متقدمة</p>
+        
+        <a href="index.html" class="btn">🚀 دخول النظام</a>
+        
+        <div class="features">
+            <h3>المميزات الرئيسية:</h3>
+            <ul>
+                <li>لوحة تحكم تفاعلية مع رسوم بيانية متقدمة</li>
+                <li>إدارة شاملة للمشاريع والمهام</li>
+                <li>نظام صلاحيات متقدم (مدير عام، مدير، موظف)</li>
+                <li>تقارير مفصلة وقابلة للتصدير</li>
+                <li>إدارة الفريق وتتبع الإنتاجية</li>
+                <li>واجهة عربية متجاوبة وحديثة</li>
+                <li>تخزين محلي آمن للبيانات</li>
+                <li>إمكانية التثبيت كتطبيق ويب (PWA)</li>
+            </ul>
+        </div>
+        
+        <div class="accounts">
+            <h3>حسابات تجريبية:</h3>
+            
+            <div class="account">
+                <strong>مدير عام:</strong><br>
+                اسم المستخدم: admin<br>
+                كلمة المرور: admin123
+            </div>
+            
+            <div class="account">
+                <strong>مدير:</strong><br>
+                اسم المستخدم: sara<br>
+                كلمة المرور: sara123
+            </div>
+            
+            <div class="account">
+                <strong>موظف:</strong><br>
+                اسم المستخدم: mohamed<br>
+                كلمة المرور: mohamed123
+            </div>
+            
+            <div class="account">
+                <strong>موظف:</strong><br>
+                اسم المستخدم: fatima<br>
+                كلمة المرور: fatima123
+            </div>
+        </div>
+        
+        <p style="margin-top: 2rem; font-size: 1rem; opacity: 0.8;">
+            💡 نصيحة: ابدأ بحساب المدير العام لاستكشاف جميع الميزات
+        </p>
+    </div>
+
+    <script>
+        // تأثير بصري بسيط
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.test-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.8s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
